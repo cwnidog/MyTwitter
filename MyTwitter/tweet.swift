@@ -16,7 +16,7 @@ class Tweet {
   init( _ jsonDictionary: [String: AnyObject]) {
     self.text = jsonDictionary["text"] as String
     self.user = jsonDictionary["user"] as NSDictionary
-    self.userName = user ["name"] as String
+    self.userName = user["name"] as String
     
   }
 }
