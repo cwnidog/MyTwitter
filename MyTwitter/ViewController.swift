@@ -10,68 +10,31 @@ import UIKit
 import Accounts
 import Social
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   var tweets = [Tweet]()
+  var networkController = NetworkController()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // we're our own tableView delegate
+    self.tableView.delegate = self
+    
     // we're our own data source
     self.tableView.dataSource = self
     
-    // get Twitter account type
-    let accountStore = ACAccountStore()
-    let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-    
-    // request access to the Twitter account
-    accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted, error) -> Void in
-      
-      // if we are able to get access to the account
-      if granted {
-        let accounts = accountStore.accountsWithAccountType(accountType)
-        
-        // if there are accounts, we want the first one in the list
-        if !accounts.isEmpty{
-          let twitterAccount = accounts.first as ACAccount
-          
-          // formuat and send the request for the account's tweets to twitter
-          let requestURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
-          let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: nil)
-          twitterRequest.account = twitterAccount
-          
-          //send the request
-          twitterRequest.performRequestWithHandler(){ (jsonData, response, error) -> Void in
-            
-            // check responses status code, looking for anything in the 200s
-            switch response.statusCode {
-            case 200 ... 299: println("Got successfule response!")
-            //serialize the json data, so it can be interpreted
-            if let jsonArray = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: nil) as? [AnyObject]{
-              
-                //get the dictionary elements from the array and append the individual tweets to the tweets list
-                for object in jsonArray {
-                  if let jsonDictionary = object as? [String: AnyObject]{
-                    let tweet = Tweet(jsonDictionary)
-                    self.tweets.append(tweet)
-                    
-                    // put a request for teh tableView to reload its data on the main thread
-                    NSOperationQueue.mainQueue().addOperationWithBlock(){ () -> Void in
-                      self.tableView.reloadData()
-                    } // NSOperationQueue closure
-                  } // if let json Dictionary
-                }// for each object
-              } // if let json array
-              
-            case 400 ... 499: println("Got response saying error at our end")
-            case 500 ... 599: println("Got response saying error at their end")
-            default: println("Got response with unknown error \(response.statusCode)")
-            } // switch status code
-          } // send the request
-        } // if accounts array isn't empty
-      } // if granted
-    } // accountStore closure
+    // define the completion handler callback closure
+    self.networkController.fetchHomeTimeline { (tweets, errorString) -> () in
+      if errorString == nil{ // everything's OK
+        self.tweets = tweets!
+        self.tableView.reloadData()
+      } // if errorString
+      else {
+        // put in some kind of error handler here
+      }
+    }
   } // override viewDidLoad()
 
   // how many rows are there?
@@ -88,12 +51,30 @@ class ViewController: UIViewController, UITableViewDataSource {
     // get he individual tweet
     let tweet = self.tweets[indexPath.row]
     
-    // display the tweet' user name and text
+    // display the tweet' user photo, name, and text
+    // if the tweet has a user image associated with it, grab it
+    if let imageURL = NSURL(string: tweet.imageURL) {
+      if let imageData = NSData(contentsOfURL: imageURL){
+        tweet.image = UIImage(data: imageData)
+        cell.tweetImageView.image = tweet.image
+      } // if let imageData
+    } // if let imageURL
+    
     cell.tweetLabel.text = tweet.text
     cell.nameLabel.text = tweet.userName
-    
     return cell
   } // tableView(dequeueReusableCellWithIdentifier
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    // instantiate the tweetVC
+    let tweetVC = self.storyboard?.instantiateViewControllerWithIdentifier("TWEET_VC") as TweetDetailViewController
+    tweetVC.networkController = self.networkController
+    tweetVC.tweet = self.tweets[indexPath.row]
+  
+    self.navigationController?.pushViewController(tweetVC, animated: true)
+
+  
+  } // tableView(didDeselectRowAtIndexPath)
 
 } // class ViewController
 
