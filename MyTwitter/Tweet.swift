@@ -16,7 +16,7 @@ class Tweet {
   var userName: String
   var imageURL: String
   var image: UIImage?
-  var favoriteCount = ""
+  var favoriteCount: String?
   var screenName : String
   
   init( _ jsonDictionary: [String: AnyObject]) {
@@ -24,17 +24,16 @@ class Tweet {
     self.text = jsonDictionary["text"] as String // we can pull the text directly
     self.user = jsonDictionary["user"] as NSDictionary // get a handle on the user dictionary
     
-    // pull need fields from the user dictionary
+    // pull needed fields from the user dictionary
     self.userName = user["name"] as String
     self.screenName = user["screen_name"] as String
     self.imageURL = user["profile_image_url"] as String
     
     if jsonDictionary["in_reply_to_user_id"] is NSNull {
       println("nsnul")
-  } //init()
-  
+    } // if jsonDictionary
 
-  } // if in_reply_to_user_id
+  } // init()
   
   func updateWithInfo(infoDictionary: [String: AnyObject]) {
     let favoriteNumber = infoDictionary["favorite_count"] as Int

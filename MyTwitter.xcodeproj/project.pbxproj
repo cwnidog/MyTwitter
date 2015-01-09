@@ -133,6 +133,7 @@
 		2F0D51F11A5B33BF00322B0D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2FF392501A5F570A00622CD1 /* CustomTweetCell.swift */,
 				2F0D51F41A5B347900322B0D /* tweet.json */,
 				2F0D51F61A5B353100322B0D /* Tweet.swift */,
 				2FEBE9E01A5E1F82009BE2A8 /* TweetDetail.swift */,
@@ -154,7 +155,6 @@
 		2F0D51F31A5B33DE00322B0D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2FF392501A5F570A00622CD1 /* CustomTweetCell.swift */,
 				2FF3924E1A5F537100622CD1 /* CustomTweetCell.xib */,
 				2F0D51D51A5B337600322B0D /* Main.storyboard */,
 				2F0D51FC1A5B473800322B0D /* TweetCell.swift */,

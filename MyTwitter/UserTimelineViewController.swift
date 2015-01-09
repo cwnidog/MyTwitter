@@ -15,10 +15,15 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
   //var userName: String!
   var screenName : String!
   
+  
   @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      // we're our own delegate and data source
+      self.tableView.delegate = self
+      self.tableView.dataSource = self
       
       // define the completion handler callback closure
       self.networkController.fetchUserTimeline(self.screenName) { (userTweets, errorString) -> () in
@@ -31,13 +36,9 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
         } // error
       } // networkController.fetchUserTimeline()
       
+      // register the nib for the tweet table view cells
       self.tableView.registerNib(UINib(nibName: "CustomTweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "USER_TWEET_CELL")
     } // viewDidLoad()
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
   
   // how many rows are there?
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,35 +49,23 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     // get the cell for this element of the tweets array
-    let cell = tableView.dequeueReusableCellWithIdentifier("USER_TWEET_CELL", forIndexPath: indexPath) as TweetCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("USER_TWEET_CELL", forIndexPath: indexPath) as CustomTweetCell
     
     // get he individual tweet
     let tweet = self.userTweets[indexPath.row]
     
-    // display the tweet' user photo, name, and text
-    // if the tweet has a user image associated with it, grab it
-    if let imageURL = NSURL(string: tweet.imageURL) {
-      if let imageData = NSData(contentsOfURL: imageURL){
-        tweet.image = UIImage(data: imageData)
-        cell.tweetImageView.image = tweet.image
-      } // if let imageData
-    } // if let imageURL
-    
     cell.tweetLabel.text = tweet.text
-    cell.nameLabel.text = tweet.userName
-    return cell
-  } // tableView(dequeueReusableCellWithIdentifier
-
+    cell.userNameLabel.text = tweet.userName
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
+    if tweet.image == nil {
+      self.networkController.fetchImageForTweet(tweet, completionHandler: {(image) -> () in
+        cell.userImageView.image = tweet.image
+      })
+    } // if image == nil
+    else {
+      cell.userImageView.image = tweet.image
+    } // else
+    
+    return cell
+  } // tableView(cellForRowAtIndexPath)
+} // userTimelineViewController

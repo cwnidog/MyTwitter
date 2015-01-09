@@ -13,4 +13,16 @@ class CustomTweetCell: UITableViewCell {
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var tweetLabel: UILabel!
   @IBOutlet weak var userImageView: UIImageView!
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+  } // awakeFromNib()
+  
+  // prevent automatic height issue
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    self.contentView.layoutIfNeeded()
+    self.tweetLabel.preferredMaxLayoutWidth = self.tweetLabel.frame.width
+  } // layoutSubviews()
+  
 } // CustomTweetCell

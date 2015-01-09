@@ -21,11 +21,11 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var imageView: UIImageView!
   
   var networkController :NetworkController!
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // get values out of the tweet adn display
+    // get values out of the tweet and display
     self.imageView.image = tweet.image
     self.tweetTextLabel.text = tweet.text
     self.userNameLabel.text = tweet.userName

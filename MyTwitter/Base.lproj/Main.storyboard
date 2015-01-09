@@ -20,54 +20,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="G7d-aZ-RAJ">
                                 <rect key="frame" x="8" y="0.0" width="584" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TWEET_CELL" rowHeight="100" id="s5c-cL-dlK" customClass="TweetCell" customModule="MyTwitter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s5c-cL-dlK" id="uk6-PN-zeu">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UME-TF-x0U">
-                                                    <rect key="frame" x="16" y="16" width="85" height="70"/>
-                                                    <color key="backgroundColor" red="0.26544201950000001" green="1" blue="0.01263031637" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="70" id="cTY-zh-tMk"/>
-                                                        <constraint firstAttribute="width" constant="85" id="eui-Wv-5nQ"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xiT-94-XI3">
-                                                    <rect key="frame" x="109" y="16" width="62" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tweetLabel" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4p-B9-EOy">
-                                                    <rect key="frame" x="109" y="39" width="456" height="47"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="47" id="bvO-S6-i4G"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="UME-TF-x0U" firstAttribute="leading" secondItem="uk6-PN-zeu" secondAttribute="leadingMargin" constant="8" id="cwj-e6-f1z"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="H4p-B9-EOy" secondAttribute="trailing" constant="11" id="dij-a8-Xck"/>
-                                                <constraint firstItem="H4p-B9-EOy" firstAttribute="top" secondItem="xiT-94-XI3" secondAttribute="bottom" constant="8" id="irw-AE-R8I"/>
-                                                <constraint firstItem="UME-TF-x0U" firstAttribute="top" secondItem="uk6-PN-zeu" secondAttribute="topMargin" constant="8" id="kW4-89-Uuv"/>
-                                                <constraint firstItem="H4p-B9-EOy" firstAttribute="leading" secondItem="xiT-94-XI3" secondAttribute="leading" id="lxk-ch-Vev"/>
-                                                <constraint firstItem="xiT-94-XI3" firstAttribute="top" secondItem="UME-TF-x0U" secondAttribute="top" id="olE-1p-kA7"/>
-                                                <constraint firstItem="xiT-94-XI3" firstAttribute="leading" secondItem="UME-TF-x0U" secondAttribute="trailing" constant="8" id="raS-d9-VSE"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="nameLabel" destination="xiT-94-XI3" id="gVk-MA-X0T"/>
-                                            <outlet property="tweetImageView" destination="UME-TF-x0U" id="2Qd-KO-u8u"/>
-                                            <outlet property="tweetLabel" destination="H4p-B9-EOy" id="yUW-72-ekN"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -221,7 +173,7 @@
         <!--User Timeline View Controller-->
         <scene sceneID="9CY-By-nos">
             <objects>
-                <viewController storyboardIdentifier="USER_VC" id="FjH-g5-WlL" customClass="UserTimelineViewController" customModule="MyTwitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="USER_VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FjH-g5-WlL" customClass="UserTimelineViewController" customModule="MyTwitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9CC-BE-fBR"/>
                         <viewControllerLayoutGuide type="bottom" id="iVC-6c-dJl"/>
@@ -233,33 +185,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="172" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xDC-sd-9zk">
                                 <rect key="frame" x="0.0" y="0.0" width="727" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="Lsw-Cu-ujv">
-                                    <rect key="frame" x="0.0" y="0.0" width="727" height="72"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="172" id="dr8-o8-HBv">
-                                        <rect key="frame" x="0.0" y="0.0" width="727" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dr8-o8-HBv" id="bDa-iM-RA1">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5gu-8i-rgH">
-                                                    <rect key="frame" x="-16" y="-8" width="150" height="150"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="150" id="qsL-1A-RBK"/>
-                                                        <constraint firstAttribute="height" constant="150" id="vRJ-U1-gTP"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="5gu-8i-rgH" firstAttribute="leading" secondItem="bDa-iM-RA1" secondAttribute="leadingMargin" constant="-24" id="bM1-nz-0B7"/>
-                                                <constraint firstItem="5gu-8i-rgH" firstAttribute="top" secondItem="bDa-iM-RA1" secondAttribute="topMargin" constant="-16" id="qBW-8J-WBy"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
+                                <color key="sectionIndexBackgroundColor" red="0.28996196549999997" green="0.5" blue="0.72905530429999998" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

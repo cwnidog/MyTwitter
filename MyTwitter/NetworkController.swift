@@ -129,6 +129,7 @@ class NetworkController
       self.imageQueue.addOperationWithBlock(){ () -> Void in
         if let imageData = NSData(contentsOfURL: imageURL) {
           NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            tweet.image = UIImage(data: imageData)
             completionHandler(tweet.image)
           })
         } // if let imageData
