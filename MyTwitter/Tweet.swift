@@ -17,6 +17,7 @@ class Tweet {
   var imageURL: String
   var image: UIImage?
   var favoriteCount = ""
+  var screenName : String
   
   init( _ jsonDictionary: [String: AnyObject]) {
     self.id = jsonDictionary["id_str"] as String
@@ -25,6 +26,7 @@ class Tweet {
     
     // pull need fields from the user dictionary
     self.userName = user["name"] as String
+    self.screenName = user["screen_name"] as String
     self.imageURL = user["profile_image_url"] as String
     
     if jsonDictionary["in_reply_to_user_id"] is NSNull {
