@@ -28,6 +28,7 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
       self.tableView.dataSource = self
         
       self.userName.text = selectedTweet.screenName
+      self.userName.textColor = selectedTweet.textColor
       self.userImage.image = selectedTweet.image
 
       

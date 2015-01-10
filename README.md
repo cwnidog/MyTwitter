@@ -46,3 +46,8 @@ a 3rd view controller onto the stack
 * Convert your table view cells to use a Nib, so you can share the same cell for both the home time line VC and the user Timeline VC
 * Have your cells be a dynamic height based on how much text each tweet is
 * Implement a stack data structure in a separate playground
+
+#Outside Sources:
+-----------------
+
+The Twitter API uses a String representing RGB hex value to store the user's profile text color. I researched conversion from hex to UIColor on the web and eventually took a conversion function from Anthony/Blog, to use the color specified in the tweet for the profile text for the user timeline screen's header view text. Not always a good match, but probably better than using a single color for every banner.
