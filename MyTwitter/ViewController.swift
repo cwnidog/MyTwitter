@@ -25,6 +25,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // we're our own data source
     self.tableView.dataSource = self
     
+    self.tableView.registerNib(UINib(nibName: "CustomTweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "USER_TWEET_CELL")
+    self.tableView.estimatedRowHeight = 144
+    self.tableView.rowHeight = UITableViewAutomaticDimension
+    
     // define the completion handler callback closure
     self.networkController.fetchHomeTimeline { (tweets, errorString) -> () in
       if errorString == nil{ // everything's OK
@@ -36,6 +40,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
       }
     }
   } // override viewDidLoad()
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    
+  }
 
   // how many rows are there?
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,24 +55,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     // get the cell for this element of the tweets array
-    let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("USER_TWEET_CELL", forIndexPath: indexPath) as CustomTweetCell
     
     // get he individual tweet
     let tweet = self.tweets[indexPath.row]
     
-    // display the tweet' user photo, name, and text
-    // if the tweet has a user image associated with it, grab it
-    if let imageURL = NSURL(string: tweet.imageURL) {
-      if let imageData = NSData(contentsOfURL: imageURL){
-        tweet.image = UIImage(data: imageData)
-        cell.tweetImageView.image = tweet.image
-      } // if let imageData
-    } // if let imageURL
-    
     cell.tweetLabel.text = tweet.text
-    cell.nameLabel.text = tweet.userName
+    cell.userNameLabel.text = tweet.userName
+    
+    if tweet.image == nil {
+      self.networkController.fetchImageForTweet(tweet, completionHandler: {(image) -> () in
+      cell.userImageView.image = tweet.image
+      })
+    } // if image == nil
+    else {
+      cell.userImageView.image = tweet.image
+    } // else
+
     return cell
-  } // tableView(dequeueReusableCellWithIdentifier
+  } // tableView(cellForRowAtIndexPath)
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     // instantiate the tweetVC

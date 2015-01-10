@@ -21,17 +21,17 @@ class TweetDetailViewController: UIViewController {
   @IBOutlet weak var imageView: UIImageView!
   
   var networkController :NetworkController!
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // get values out of the tweet adn display
+    // get values out of the tweet and display
     self.imageView.image = tweet.image
     self.tweetTextLabel.text = tweet.text
     self.userNameLabel.text = tweet.userName
     
     self.networkController.fetchTweetInfo(tweet.id, completionHandler: {(infoDictionary, errorString) -> () in
-      println(infoDictionary)
+      //println(infoDictionary)
       
       if errorString == nil {
         self.tweet.updateWithInfo(infoDictionary)
@@ -42,5 +42,13 @@ class TweetDetailViewController: UIViewController {
     
     } // viewDidLoad()
 
+  @IBAction func ImageButtonPressed(sender: AnyObject) {
+    let userVC = self.storyboard?.instantiateViewControllerWithIdentifier("USER_VC") as UserTimelineViewController
+    userVC.networkController = self.networkController
+    userVC.selectedTweet = self.tweet
+    
+    self.navigationController?.pushViewController(userVC, animated: true)
+
+  }
 
 } // DetailViewController
