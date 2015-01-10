@@ -33,3 +33,16 @@ Add initial files for home-grown Twitter App:
 * Create a 2nd view controller that fetches more specific information on the tweet that the user presses on.
 * The API URL for that is "https://api.twitter.com/1.1/statuses/show.json?id=\(id)" where id is the id of the tweet that was pressed on. You should create a 2nd method in your network controller that fetches more info for the tweet that was selected, using this URL in the SLRequest.
 * Upon clicking a tweet, your interface should pop to the 2nd view controller and display the tweet selected and additional info that was retrieved by the 2nd network call.
+
+#Day4
+------
+
+* In your single tweet view controller, upon clicking on the person's image (hint: change the image view to a button, buttons can have images) the app should push
+a 3rd view controller onto the stack
+* This 3rd view controller will show that user's timeline (the api url is "https://api.twitter.com/1.1/statuses/user_timeline.json?username
+(https://api.twitter.com/1.1/statuses/user_timeline.json?username%
+5D() =\(username)"
+* Use a table view header view to mimic Twitter's layout of that screen (show their profile background image, their picture, their name, their location)
+* Convert your table view cells to use a Nib, so you can share the same cell for both the home time line VC and the user Timeline VC
+* Have your cells be a dynamic height based on how much text each tweet is
+* Implement a stack data structure in a separate playground
