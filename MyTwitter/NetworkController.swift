@@ -163,9 +163,7 @@ class NetworkController
     
     //send the request
     twitterRequest.performRequestWithHandler(){ (jsonData, response, error) -> Void in
-      
-      //println(jsonData)
-    
+      // if we didn't get an error back with the request, process the response
       if error == nil {
         // check responses status code, looking for anything in the 200s
         switch response.statusCode {

@@ -31,7 +31,7 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
       self.userImage.image = selectedTweet.image
 
       
-      // define the completion handler callback closure
+      // define the completion handler callback closure for fetching the user timeline tweets
       self.networkController.fetchUserTimeline(self.selectedTweet.screenName, { (userTweets, errorString) -> () in
         if errorString == nil{ // everything's OK
           self.userTweets = userTweets!
@@ -42,11 +42,13 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
         } // error
       }) // networkController.fetchUserTimeline()
       
+      // define the completion handler callback closure for fetching the user's backgroune banner
       self.networkController.fetchBannerForUser(selectedTweet.screenName, completionHandler: { (bannerImage, error) -> () in
         if error == nil {
+          // got the user's background banner
           println("fetch complete")
           self.userBackgroundImage.image = bannerImage
-        } // if !error
+        } // if error
         else {
           println("fetchBannerForUserreturned an error")
         }
