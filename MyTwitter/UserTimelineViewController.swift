@@ -43,7 +43,7 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
       }) // networkController.fetchUserTimeline()
       
       self.networkController.fetchBannerForUser(selectedTweet.screenName, completionHandler: { (bannerImage, error) -> () in
-        if error != nil {
+        if error == nil {
           println("fetch complete")
           self.userBackgroundImage.image = bannerImage
         } // if !error
