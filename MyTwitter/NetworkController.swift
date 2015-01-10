@@ -156,13 +156,15 @@ class NetworkController
   func fetchBannerForUser(userName: String, completionHandler: (UIImage, String?) -> ()) {
     // format and send the request for the account's tweets to twitter
     let requestURL = NSURL(string: "https://api.twitter.com/1.1/users/profile_banner.json?screen_name=\(userName)")
-    println(requestURL!)
-    println("This is the User Name:\(userName)")
+    println("This is the requested URL: \(requestURL!)")
+    println("This is the User Name in fetchBannerForUser:\(userName)")
     let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: nil)
     twitterRequest.account = self.twitterAccount
     
     //send the request
     twitterRequest.performRequestWithHandler(){ (jsonData, response, error) -> Void in
+      
+      //println(jsonData)
     
       if error == nil {
         // check responses status code, looking for anything in the 200s

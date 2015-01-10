@@ -12,8 +12,7 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
   
   var networkController: NetworkController!
   var userTweets = [Tweet]()
-  var screenName : String!
-  var firstTweet : Tweet!
+  var selectedTweet : Tweet!
   
   @IBOutlet weak var headerView : UIView!
   @IBOutlet weak var tableView: UITableView!
@@ -27,33 +26,32 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
       // we're our own delegate and data source
       self.tableView.delegate = self
       self.tableView.dataSource = self
+        
+      self.userName.text = selectedTweet.screenName
+      self.userImage.image = selectedTweet.image
+
       
       // define the completion handler callback closure
-      self.networkController.fetchUserTimeline(self.screenName) { (userTweets, errorString) -> () in
+      self.networkController.fetchUserTimeline(self.selectedTweet.screenName, { (userTweets, errorString) -> () in
         if errorString == nil{ // everything's OK
           self.userTweets = userTweets!
-          self.firstTweet = self.userTweets.first
           self.tableView.reloadData()
         } // if errorString
         else {
           // put in some kind of error handler here
         } // error
-      } // networkController.fetchUserTimeline()
+      }) // networkController.fetchUserTimeline()
       
-      self.networkController.fetchBannerForUser(screenName, completionHandler: { (bannerImage, error) -> () in
+      self.networkController.fetchBannerForUser(selectedTweet.screenName, completionHandler: { (bannerImage, error) -> () in
         if error != nil {
           println("fetch complete")
           self.userBackgroundImage.image = bannerImage
-          self.userImage.image = self.firstTweet.image
-          
         } // if !error
         else {
-          println("There is an error")
+          println("fetchBannerForUserreturned an error")
         }
       })
-      
-      self.userName.text = screenName
-            
+        
       // register the nib for the tweet table view cells
       self.tableView.registerNib(UINib(nibName: "CustomTweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "USER_TWEET_CELL")
     } // viewDidLoad()

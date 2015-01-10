@@ -45,8 +45,7 @@ class TweetDetailViewController: UIViewController {
   @IBAction func ImageButtonPressed(sender: AnyObject) {
     let userVC = self.storyboard?.instantiateViewControllerWithIdentifier("USER_VC") as UserTimelineViewController
     userVC.networkController = self.networkController
-    //userVC.userName = self.tweet.userName
-    userVC.screenName = self.tweet.screenName
+    userVC.selectedTweet = self.tweet
     
     self.navigationController?.pushViewController(userVC, animated: true)
 
