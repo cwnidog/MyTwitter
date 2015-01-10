@@ -56,6 +56,7 @@
 		2FF3924C1A5F48EC00622CD1 /* UserTimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimelineViewController.swift; sourceTree = "<group>"; };
 		2FF3924E1A5F537100622CD1 /* CustomTweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTweetCell.xib; sourceTree = "<group>"; };
 		2FF392501A5F570A00622CD1 /* CustomTweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTweetCell.swift; sourceTree = "<group>"; };
+		5D037C541A61D0DD00C34F03 /* StackPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = StackPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 		2F0D51C31A5B337600322B0D = {
 			isa = PBXGroup;
 			children = (
+				5D037C541A61D0DD00C34F03 /* StackPlayground.playground */,
 				2F0D51CE1A5B337600322B0D /* MyTwitter */,
 				2F0D51E41A5B337600322B0D /* MyTwitterTests */,
 				2F0D51CD1A5B337600322B0D /* Products */,
