@@ -186,6 +186,54 @@
                                 <rect key="frame" x="0.0" y="0.0" width="727" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" red="0.28996196549999997" green="0.5" blue="0.72905530429999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="NMh-ae-hh4">
+                                    <rect key="frame" x="0.0" y="0.0" width="727" height="197"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ime-nd-iuJ" userLabel="BackgroundImage View">
+                                            <rect key="frame" x="0.0" y="0.0" width="711" height="197"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="200" id="iVk-u3-zZt"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="iVk-u3-zZt"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kYm-8f-gMP" userLabel="UserImage View">
+                                            <rect key="frame" x="8" y="8" width="100" height="100"/>
+                                            <color key="backgroundColor" red="0.26544201950000001" green="1" blue="0.01263031637" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="EVH-4W-3gJ"/>
+                                                <constraint firstAttribute="height" constant="100" id="Zeh-b6-qvc"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserNameLabel" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Na1-Yz-66d">
+                                            <rect key="frame" x="116" y="46" width="122" height="24"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.28996196549999997" green="0.5" blue="0.72905530429999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="kYm-8f-gMP" firstAttribute="top" secondItem="NMh-ae-hh4" secondAttribute="top" constant="8" id="61U-Rt-ZYu"/>
+                                        <constraint firstItem="Na1-Yz-66d" firstAttribute="centerY" secondItem="kYm-8f-gMP" secondAttribute="centerY" id="6D8-JB-91J"/>
+                                        <constraint firstItem="Na1-Yz-66d" firstAttribute="centerX" secondItem="kYm-8f-gMP" secondAttribute="centerX" id="9zT-mF-m9Y"/>
+                                        <constraint firstAttribute="trailing" secondItem="Ime-nd-iuJ" secondAttribute="trailing" constant="16" id="JDG-7T-b33"/>
+                                        <constraint firstItem="Ime-nd-iuJ" firstAttribute="leading" secondItem="NMh-ae-hh4" secondAttribute="leading" id="P6w-xR-DhE"/>
+                                        <constraint firstItem="Ime-nd-iuJ" firstAttribute="top" secondItem="NMh-ae-hh4" secondAttribute="top" id="cFO-pz-vvw"/>
+                                        <constraint firstItem="Na1-Yz-66d" firstAttribute="leading" secondItem="kYm-8f-gMP" secondAttribute="trailing" constant="8" id="ezT-hM-OTe"/>
+                                        <constraint firstAttribute="bottom" secondItem="Ime-nd-iuJ" secondAttribute="bottom" id="fLg-k6-6gc"/>
+                                        <constraint firstItem="kYm-8f-gMP" firstAttribute="leading" secondItem="NMh-ae-hh4" secondAttribute="leading" constant="8" id="u1H-Bx-PEU"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="9zT-mF-m9Y"/>
+                                        </mask>
+                                    </variation>
+                                </view>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -197,7 +245,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="headerView" destination="NMh-ae-hh4" id="3qc-yJ-k8T"/>
                         <outlet property="tableView" destination="xDC-sd-9zk" id="feU-0k-iEJ"/>
+                        <outlet property="userBackgroundImage" destination="Ime-nd-iuJ" id="VRy-vi-04a"/>
+                        <outlet property="userImage" destination="kYm-8f-gMP" id="mbt-bF-iWt"/>
+                        <outlet property="userName" destination="Na1-Yz-66d" id="Ou1-Ul-Dxa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1Y-id-0lr" userLabel="First Responder" sceneMemberID="firstResponder"/>

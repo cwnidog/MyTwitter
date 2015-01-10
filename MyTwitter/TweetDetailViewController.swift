@@ -31,7 +31,7 @@ class TweetDetailViewController: UIViewController {
     self.userNameLabel.text = tweet.userName
     
     self.networkController.fetchTweetInfo(tweet.id, completionHandler: {(infoDictionary, errorString) -> () in
-      println(infoDictionary)
+      //println(infoDictionary)
       
       if errorString == nil {
         self.tweet.updateWithInfo(infoDictionary)

@@ -12,11 +12,14 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
   
   var networkController: NetworkController!
   var userTweets = [Tweet]()
-  //var userName: String!
   var screenName : String!
+  var firstTweet : Tweet!
   
-  
+  @IBOutlet weak var headerView : UIView!
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var userBackgroundImage: UIImageView!
+  @IBOutlet weak var userImage: UIImageView!
+  @IBOutlet weak var userName: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,7 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
       self.networkController.fetchUserTimeline(self.screenName) { (userTweets, errorString) -> () in
         if errorString == nil{ // everything's OK
           self.userTweets = userTweets!
+          self.firstTweet = self.userTweets.first
           self.tableView.reloadData()
         } // if errorString
         else {
@@ -36,6 +40,20 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
         } // error
       } // networkController.fetchUserTimeline()
       
+      self.networkController.fetchBannerForUser(screenName, completionHandler: { (bannerImage, error) -> () in
+        if error != nil {
+          println("fetch complete")
+          self.userBackgroundImage.image = bannerImage
+          self.userImage.image = self.firstTweet.image
+          
+        } // if !error
+        else {
+          println("There is an error")
+        }
+      })
+      
+      self.userName.text = screenName
+            
       // register the nib for the tweet table view cells
       self.tableView.registerNib(UINib(nibName: "CustomTweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "USER_TWEET_CELL")
     } // viewDidLoad()
@@ -65,7 +83,6 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource, UITab
     else {
       cell.userImageView.image = tweet.image
     } // else
-    
     return cell
   } // tableView(cellForRowAtIndexPath)
 } // userTimelineViewController

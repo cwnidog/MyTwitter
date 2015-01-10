@@ -18,6 +18,7 @@ class Tweet {
   var image: UIImage?
   var favoriteCount: String?
   var screenName : String
+  var backgroundImageURL: String
   
   init( _ jsonDictionary: [String: AnyObject]) {
     self.id = jsonDictionary["id_str"] as String
@@ -28,6 +29,7 @@ class Tweet {
     self.userName = user["name"] as String
     self.screenName = user["screen_name"] as String
     self.imageURL = user["profile_image_url"] as String
+    self.backgroundImageURL = user["profile_background_image_url_https"] as String
     
     if jsonDictionary["in_reply_to_user_id"] is NSNull {
       println("nsnul")
